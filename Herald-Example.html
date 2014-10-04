@@ -1,0 +1,25 @@
+<head>
+  <title>Herald-Example</title>
+</head>
+
+<template name="hello">
+  <div class="ui center aligned dividing header">
+    Welcome to Meteor!
+    <button class="ui blue button">Click Me</button>
+  </div>
+  {{> notifications }}
+</template>
+
+
+<template name='notifications'>
+  {{#if notificationsCount}}
+    <p class="ui basic center aligned segment"> Click to mark as read </p>
+  {{/if}}
+  <div class='list'>
+    {{#each notifications}}
+      <div class='ui segment center aligned item'>
+        {{this.message}} <!-- Blaze will call the function -->
+      </div>
+    {{/each}}
+  </div>
+</template>
