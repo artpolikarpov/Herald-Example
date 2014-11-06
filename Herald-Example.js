@@ -42,8 +42,7 @@ if (Meteor.isClient) {
 
 // Routing and login.
 
-Router.map(function () {
-  this.route('hello', { path: '/'})
-})
+Router.route('hello', { path: '/'})
+
 Router.onBeforeAction(AccountsTemplates.ensureSignedIn, {only: ['hello']});
 AccountsTemplates.init();
