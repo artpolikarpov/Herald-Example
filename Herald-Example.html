@@ -3,23 +3,52 @@
 </head>
 
 <template name="hello">
-  <div class="ui center aligned dividing header">
-    Welcome to Meteor!
-    <button class="ui blue button">Click Me</button>
-  </div>
+  {{#ionContent}}
+    <button class="button button-block button-positive">
+      Add Notification
+    </button>
   {{> notifications }}
+  {{/ionContent}}
 </template>
 
 
 <template name='notifications'>
   {{#if notificationsCount}}
-    <p class="ui basic center aligned segment"> Click to mark as read </p>
-  {{/if}}
-  <div class='list'>
-    {{#each notifications}}
-      <div class='ui segment center aligned item'>
-        {{this.message}} <!-- Blaze will call the function -->
+    <div class="card">
+      <div class="item item-text-wrap">
+        Click notification to mark as read
       </div>
+    </div>
+  {{/if}}
+  {{#ionList class="my-class"}}
+    {{#each notifications}}
+      {{#ionItem buttonRight=true}}
+        {{ this.message }} <!-- Blaze will call the function -->
+        <button class="button button-negative remove">
+          {{> ionIcon icon="trash-b"}}
+        </button>
+      {{/ionItem}}
     {{/each}}
-  </div>
+  {{/ionList}}
+</template>
+
+
+<template name='stuff'>
+  you have {{this.data}}
+</template>
+
+<template name='Layout'>
+  {{#ionBody}}
+    
+    {{#contentFor "headerTitle"}}
+      <h1 class="title">Herald</h1>
+    {{/contentFor}}
+
+    {{> ionNavBar}}
+
+    {{#ionNavView}}
+      {{> yield}}
+    {{/ionNavView}}
+
+  {{/ionBody}}
 </template>

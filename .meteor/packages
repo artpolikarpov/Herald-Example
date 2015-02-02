@@ -6,9 +6,13 @@
 
 meteor-platform
 insecure
-nooitaf:semantic-ui
 iron:router
-accounts-password
-kestanous:herald
-useraccounts:semantic-ui
+fourseven:scss@=1.0.0
+meteoric:ionic-sass
+meteoric:ionicons-sass
+meteoric:ionic
 
+accounts-password
+accounts-meteor-developer
+kestanous:herald
+useraccounts:ionic

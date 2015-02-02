@@ -1,7 +1,7 @@
 //Create your courier
 Herald.addCourier('clicked', {
   media: { onsite: {} },
-  message: function () { return 'You clicked the button!'; }
+  message: 'stuff'
 });
 
 //Create your notification
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
   })
 
   Template.notifications.events({
-    'click .item': function (event, template) {
+    'click .remove': function (event, template) {
       Herald.collection.update(this._id, {$set: {read: true} });
     }
   });
@@ -42,7 +42,20 @@ if (Meteor.isClient) {
 
 // Routing and login.
 
-Router.route('hello', { path: '/'})
+Router.route('/herald', function () {
+  this.layout('Layout');
+  this.render('hello')
+}, {
+  name: 'herald'
+})
 
-Router.onBeforeAction(AccountsTemplates.ensureSignedIn, {only: ['hello']});
-AccountsTemplates.init();
+AccountsTemplates.configure({
+  homeRoutePath: '/herald'
+});
+
+
+AccountsTemplates.configureRoute('signIn', {
+  path: '/'
+});
+
+Router.onBeforeAction(AccountsTemplates.ensureSignedIn, {only: ['herald']});
