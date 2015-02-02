@@ -23,9 +23,6 @@ if (Meteor.isClient) {
   });
 
   Template.notifications.helpers({
-    notificationsCount: function () {
-      return Herald.collection.find({read: false}).count();
-    },
     notifications: function () {
       return Herald.collection.find({read: false});
     } 

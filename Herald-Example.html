@@ -13,13 +13,6 @@
 
 
 <template name='notifications'>
-  {{#if notificationsCount}}
-    <div class="card">
-      <div class="item item-text-wrap">
-        Click notification to mark as read
-      </div>
-    </div>
-  {{/if}}
   {{#ionList class="my-class"}}
     {{#each notifications}}
       {{#ionItem buttonRight=true}}
