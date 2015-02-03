@@ -3,45 +3,52 @@
 </head>
 
 <template name="hello">
-  {{#ionContent}}
-    <button class="button button-block button-positive">
-      Add Notification
-    </button>
-  {{> notifications }}
-  {{/ionContent}}
+  <div class="section">
+    <h4 class="header">
+      Notifications
+      <a id='addNote' class="btn-floating waves-effect waves-light red">
+        <i class="mdi-content-add"></i>
+      </a>
+    </h4>
+    {{> notifications }}
+  </div>
 </template>
 
 
 <template name='notifications'>
-  {{#ionList class="my-class"}}
+  <ul class="collection">
     {{#each notifications}}
-      {{#ionItem buttonRight=true}}
-        {{ this.message }} <!-- Blaze will call the function -->
-        <button class="button button-negative remove">
-          {{> ionIcon icon="trash-b"}}
-        </button>
-      {{/ionItem}}
+      <li class="collection-item">
+        <div>
+          {{ message }}
+          <a class="secondary-content remove">
+            <i class="secondary-content mdi-action-highlight-remove"></i>
+          </a>
+        </div>
+      </li>
     {{/each}}
-  {{/ionList}}
+  </ul>
 </template>
 
-
-<template name='stuff'>
-  you have {{this.data}}
+<template name='message'>
+  A notification with data.text: "{{this.data.text}}"
 </template>
 
 <template name='Layout'>
-  {{#ionBody}}
-    
-    {{#contentFor "headerTitle"}}
-      <h1 class="title">Herald</h1>
-    {{/contentFor}}
-
-    {{> ionNavBar}}
-
-    {{#ionNavView}}
+  <header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Herald Demo</a>
+      <ul id="nav-mobile" class="right side-nav">
+        <li><a id='logout'>Logout</a></li>
+      </ul>
+      <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+  </header>
+  <main>
+    <div class="container">
       {{> yield}}
-    {{/ionNavView}}
-
-  {{/ionBody}}
+    </div>
+  </main>
 </template>

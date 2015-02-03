@@ -8,11 +8,12 @@ meteor-platform
 insecure
 iron:router
 fourseven:scss@=1.0.0
-meteoric:ionic-sass
-meteoric:ionicons-sass
-meteoric:ionic
+d0minikk:materialize-meteor
 
+service-configuration
 accounts-password
 accounts-meteor-developer
 kestanous:herald
-useraccounts:ionic
+useraccounts:materialize
+
+# mike:mocha
