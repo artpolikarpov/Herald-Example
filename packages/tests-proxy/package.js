@@ -7,6 +7,7 @@ Package.describe({
 
 Package.on_use(function (api) {
 	api.use("coffeescript", ["client", "server"]);
+	api.add_files("tests/mocha/both/heraldObject.js",["server","client"]);
 	api.add_files("tests/mocha/client/sampleClientTest.js",["client"]);
 	api.add_files("tests/mocha/server/sampleServerTest.js",["server"]);
 });

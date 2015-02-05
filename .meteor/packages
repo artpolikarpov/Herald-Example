@@ -7,7 +7,6 @@
 meteor-platform
 insecure
 iron:router
-fourseven:scss@=1.0.0
 d0minikk:materialize-meteor
 
 service-configuration
@@ -16,4 +15,4 @@ accounts-meteor-developer
 kestanous:herald
 useraccounts:materialize
 
-# mike:mocha
+mike:mocha

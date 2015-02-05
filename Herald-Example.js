@@ -49,17 +49,6 @@ if (Meteor.isClient) {
   });
 }
 
-if (Meteor.isServer) {
-  Meteor.startup(function() {
-    ServiceConfiguration.configurations.remove({service: 'meteor-developer'});
-    ServiceConfiguration.configurations.insert({
-      service: 'meteor-developer',
-      clientId: '39ENpQKv3xKxyKucs',
-      secret: 'vrMXvfa2t6qAZ2PqDvihLs63iHLXgSFcYT'
-    });
-  });
-}
-
 
 
 // Routing and login.
@@ -84,32 +73,7 @@ Router.onBeforeAction(AccountsTemplates.ensureSignedIn, {only: ['herald']});
 
 
 AccountsTemplates.configure({
-    // Behaviour
-    confirmPassword: true,
-    enablePasswordChange: true,
-    forbidClientAccountCreation: false,
-    overrideLoginErrors: true,
-    sendVerificationEmail: false,
-
-    // Appearance
-    showAddRemoveServices: true,
-    showForgotPasswordLink: true,
-    showLabels: false,
-    showPlaceholders: true,
-
     // Client-side Validation
     continuousValidation: true,
-    negativeFeedback: false,
-    negativeValidation: true,
-    positiveValidation: true,
-    positiveFeedback: true,
-    showValidating: true,
-
-    // Privacy Policy and Terms of Use
-    privacyUrl: 'privacy',
-    termsUrl: 'terms-of-use',
-
-    // Redirects
-    homeRoutePath: '/home',
-    redirectTimeout: 4000,
+    showForgotPasswordLink: true
 });
