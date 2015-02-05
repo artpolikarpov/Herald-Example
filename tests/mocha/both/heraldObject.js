@@ -37,10 +37,27 @@ if (!(typeof MochaWeb === 'undefined')){
       it("should have _extentionParams", function(){
         chai.assert(_.has( Herald, "_extentionParams"));
       });
-      it("should should have _media", function(){
+      it("should have _media", function(){
         chai.assert(_.has( Herald, "_media"));
       });
-      
+      it("should have _message", function(){
+        chai.assert(_.has( Herald, "_message"));
+      });
+      it("should have _setProperty", function(){
+        chai.assert(_.has( Herald, "_setProperty"));
+      });
+      it("should have _getProperty", function(){
+        chai.assert(_.has( Herald, "_getProperty"));
+      });
+      it("should have _getUser", function(){
+        chai.assert(_.has( Herald, "_getUser"));
+      });
+      it("should have _getCourier", function(){
+        chai.assert(_.has( Herald, "_getCourier"));
+      });
+      it("should have _setCourier", function(){
+        chai.assert(_.has( Herald, "_setCourier"));
+      });
     });
   });
 }
