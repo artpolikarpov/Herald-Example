@@ -1,6 +1,6 @@
 if (!(typeof MochaWeb === 'undefined')){
   MochaWeb.testOnly(function(){
-    
+
 
     describe("Herald object", function(){
       it("should exist", function(){
@@ -40,48 +40,143 @@ if (!(typeof MochaWeb === 'undefined')){
       it("should have _extentionParams", function(){
         chai.assert.isArray(Herald._extentionParams);
       });
-
-      it("should have _message", function(){
-        chai.assert.isObject(Herald._message);
-      });
-      it("should have _setProperty", function(){
-        chai.assert.isObject(Herald._setProperty);
-      });
-      it("should have _getProperty", function(){
-        chai.assert.isObject(Herald._getProperty);
-      });
-      it("should have _getUser", function(){
-        chai.assert.isObject(Herald._getUser);
-      });
-      it("should have _getCourier", function(){
-        chai.assert.isObject(Herald._getCourier);
-      });
-      it("should have _setCourier", function(){
-        chai.assert.isObject(Herald._setCourier);
-      });
     });
 
-  describe("Herald._media", function(){
-    before(function(done){
-      Herald._serverRunners = {
-        server1: {},
-        server2: {}
-      };
-      Herald._clientRunners = {
-        client1: {},
-        client2: {}
-      };
-      done();
+    describe("Herald._media", function(){
+      before(function(done){
+        Herald._serverRunners = {
+          server1: {},
+          server2: {}
+        };
+        Herald._clientRunners = {
+          client1: {},
+          client2: {}
+        };
+        done();
+      });
+
+      it("should be a function", function(){
+        chai.assert.isFunction(Herald._media);
+      });
+      it("should return client and sever runners", function(){
+        chai.assert.sameMembers(Herald._media(), ['server1', 'server2', 'client1', 'client2']);
+      });
     });
 
-    it("should have _media", function(){
-      chai.assert.isFunction(Herald._media);
+
+    describe("Herald._message", function(){
+
+      it("should be a function", function(){
+        chai.assert.isFunction(Herald._message);
+      });
+
+      //TODO: lots more testing on this...
     });
-    it("should return client and sever runners", function(){
-      chai.assert.sameMembers(Herald._media(), ['server1', 'server2', 'client1', 'client2']);
+
+    describe("Herald [[set]] / [[get]] property", function(){
+
+      it("_setProperty should be a function", function(){
+        chai.assert.isFunction(Herald._setProperty);
+      });
+
+      it("_setProperty should create an object", function(){
+        chai.assert.deepEqual(Herald._setProperty('key', 'value'), {key: 'value'});
+        chai.assert.notDeepEqual(Herald._setProperty('key', 'value'), {key: 'value', not: 'correct'});
+      });
+
+      it("_getProperty should be a function", function(){
+        chai.assert.isFunction(Herald._getProperty);
+      });
+
+      it("_getProperty should reduced an object", function(){
+        var testObj = { 
+          a: {
+            b: 'b'
+          },
+          b: {
+            c: {
+              d: 'd'
+            }
+          }
+        }
+        chai.assert.deepEqual(Herald._getProperty(testObj, 'a'), {b:'b'});
+        chai.assert.deepEqual(Herald._getProperty(testObj, 'b.c'), {d:'d'});
+      });      
+
     });
+
+    describe("Herald._getUser", function(){
+
+      it("should be a function", function(){
+        chai.assert.isFunction(Herald._getUser);
+      });
+
+    });
+
+    describe("Herald._getCourier", function(){
+      beforeEach(function(done){
+        Herald._couriers = {
+          c1: {
+            works: true
+          },
+          c2: {
+            works: true,
+            c3: {
+              works: true
+            }
+          }
+        };
+        done();
+      });
+      afterEach(function (done) {
+        Herald._couriers = {}
+        done()
+      });
+      it("should be a function", function(){
+        chai.assert.isFunction(Herald._getCourier);
+      });
+
+      it("should get couriers from Herald", function(){
+        chai.assert.deepEqual(Herald._getCourier('c1'), { works: true });
+        chai.assert.deepEqual(Herald._getCourier('c2.c3'), { works: true });
+      });
+
+      it("should get couriers from a couriers object", function(){
+        var mockCouriers = {
+          c1: {
+            works: true
+          },
+          c2: {
+            works: true,
+            c3: {
+              works: true
+            }
+          }
+        };
+        chai.assert.deepEqual(Herald._getCourier('c1', mockCouriers), { works: true });
+        chai.assert.deepEqual(Herald._getCourier('c2.c3', mockCouriers), { works: true });
+      });
+
+    });
+    describe("Herald._setCourier", function(){
+      afterEach(function (done) {
+        Herald._couriers = {}
+        done()
+      })
+
+      it("should be a function", function(){
+        chai.assert.isFunction(Herald._setCourier);
+      });
+
+      it("should set couriers on Herald", function(){
+        chai.assert.deepEqual(Herald._setCourier('c1', {works: true}), { works: true });
+        chai.assert.deepEqual(Herald._couriers, { c1: { works: true } });
+
+        chai.assert.deepEqual(Herald._setCourier('c2.c3', {works: true}), { works: true });
+        chai.assert.deepEqual(Herald._couriers, { c1: { works: true }, c2: { c3: { works: true } } });
+      });
+
+    });
+
   });
-
-
-});
 }
